@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-lg-6">
+    <file-upload></file-upload>
+  </div>
+  <div class="col-lg-6">
+    <label class="custom-file">
+      <input type="file" #fileupload class="custom-file-input">
+      <span class="custom-file-control"></span>
+    </label>
+  </div>
+  <div class="col-lg-12">
+    <div class="card d-inline-flex mx-10" *ngFor="let item of list">
+       <div class="card-block">
+        <img src="https://placehold.it/350x150">
+      </div>
+      <div class="card-footer text-muted">
+        {{item.name}}
+      </div>
+    </div>
+  </div>
+</div>

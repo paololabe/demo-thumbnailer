@@ -1,0 +1,17 @@
+.file-upload{
+    h5{
+        font-size:14px;
+    }
+
+     .upload-area
+            {
+                
+                padding:20px;
+                text-align: center;
+                border:2px dashed #ccc;
+
+                &.upload-area-over{
+                    border:2px dashed #ff0000;
+                }
+            }
+}

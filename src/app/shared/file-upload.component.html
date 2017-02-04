@@ -1,0 +1,38 @@
+    <div class="file-upload">
+    <div class="row">
+    <div class="col-xs-6">
+        <div ng2FileDrop
+           [ngClass]="{'upload-area-over': hasBaseDropZoneOver}"
+           (fileOver)="fileOverBase($event)"
+            [uploader]="uploader"
+            class="upload-area"
+            (click)="browseFile()"
+            (onFileDrop)="onFileDrop($event)"
+            >
+                                
+            <h5 [hidden]="uploader.queue?.length>0">Clicca o trascinalo in quest'area</h5>
+                
+            <input type="file" #fileSelect ng2FileSelect [uploader]="uploader" style="display:none" />
+                                    
+            <div *ngFor="let item of uploader.queue">
+                
+                <div nowrap>Name: {{item.file.name}}</div>
+                <div nowrap>Size: {{item.file.size | bytes}}</div>
+
+                <img class="img-fluid" src="{{lastImageAddedBase64}}">
+            </div>
+
+        </div>
+                            
+    </div>
+    <div class="col-xs-6" style="text-align:center;margin-top:5px;">
+         <button type="button" class="btn btn-success btn-s"
+                                        (click)="upload()" [hidden]="!uploader.getNotUploadedItems().length">
+                                        <span class="glyphicon glyphicon-upload"></span> Carica il file
+        </button>
+        <br/>
+    
+    
+    </div>
+    </div>
+    </div>
