@@ -5,6 +5,7 @@ import * as AWS from 'aws-sdk';
 @Injectable()
 export class ThumbsService {
 
+    private s3Folder="uploads360/tmp/"
     
     
     constructor() { 
@@ -16,11 +17,13 @@ export class ThumbsService {
 
     }
 
-    upload(file:File){
+    upload(size: number,file:File,cb){
         
+        let s3Folder= 'uploads' + size + '/';
+
         let bucket = new AWS.S3({params: {Bucket: 'labe-storage'}});
 
-        let params:any = {Key: file.name, Body: file};
+        let params:any = {Key: s3Folder + file.name, Body: file, ACL: 'public-read'};
 
         bucket.upload(params, function (err, data) {
 
@@ -30,9 +33,10 @@ export class ThumbsService {
             
             let params:any={
                         TableName:'images',
-                        Item:{key:file.name,name:file.name,filename:file.name}};
+                        Item:{key:file.name,name:file.name,filename:file.name,size:size}};
             client.put(params,function(err,data){
                 console.log(err,data);
+                if(cb)cb(err);
             });
 
             }

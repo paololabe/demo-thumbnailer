@@ -1,3 +1,4 @@
+import { ErrorCollector } from '@angular/compiler';
 import { ThumbsService } from '../pages/thumbs.service';
 import { Component, OnInit,EventEmitter,Output,Input,ViewChild,ElementRef } from '@angular/core';
 
@@ -21,7 +22,10 @@ export class FileUploadComponent implements OnInit {
 
     @ViewChild('fileSelect') fileSelect:ElementRef;
     @Input('namepostfix') type:string;
+    
     @Output() uploadComplete = new EventEmitter<any>();
+
+    @Input() size=360;
 
     constructor(private sharedService: SharedService,private thumbsService:ThumbsService) { 
 
@@ -62,12 +66,19 @@ export class FileUploadComponent implements OnInit {
     }
 
     browseFile(){
-        this.fileSelect.nativeElement.click()
+        this.fileSelect.nativeElement.click();
     }
 
     upload(){
         //this.uploader.uploadAll();
-        this.thumbsService.upload(this.uploader.queue[0]._file);
+        this.thumbsService.upload(this.size,this.uploader.queue[0]._file,
+        (err)=>{
+            if(!err){
+                this.uploader.clearQueue();
+                this.uploadComplete.emit();
+            }
+        }
+        );
     }
 
     getImage(){

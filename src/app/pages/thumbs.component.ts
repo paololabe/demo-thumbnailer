@@ -15,13 +15,23 @@ export class ThumbsComponent implements OnInit {
         {key:'3',name:'image 3',filename:''},
     ];
 
+    public size=360;
+    
 
-    ngOnInit() {
+    uploadComplete(){
+        this.loadData();
+    }
 
+    loadData(){
         this.thumsService.loadFiles((err,data)=>{
             console.log(err,data);
             this.list=<Thumb[]>data.Items;
         })
+    }
+
+    ngOnInit() {
+        
+        this.loadData();
 
      }
 
