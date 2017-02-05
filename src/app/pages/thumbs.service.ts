@@ -32,7 +32,7 @@ export class ThumbsService {
             let client=new AWS.DynamoDB.DocumentClient();
             
             let params:any={
-                        TableName:'images',
+                        TableName:'images'+size,
                         Item:{key:file.name,name:file.name,filename:file.name,size:size}};
             client.put(params,function(err,data){
                 console.log(err,data);
@@ -43,11 +43,27 @@ export class ThumbsService {
         });   
     }
 
-    loadFiles(cb){
+    loadFiles(size,cb){
             let client=new AWS.DynamoDB.DocumentClient();
-            client.scan({TableName:'images'},function(err,data){
+            client.scan({TableName:'images'+size},function(err,data){
                 console.log(err,data);
                 if(cb)cb(err,data);
             });
+    }
+
+
+    delete(size,key:string,cb){
+        let params = {
+                        TableName:"images" + size,
+                        Key:{"key":key}
+                    };
+        let client=new AWS.DynamoDB.DocumentClient();
+        client.delete(params, function(err, data) {
+            if (err) {
+                console.error("Unable to delete item. Error JSON:", JSON.stringify(err, null, 2));
+            } else {
+                if(cb) cb();
+            }
+});
     }
 }

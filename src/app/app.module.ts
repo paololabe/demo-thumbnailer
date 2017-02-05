@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+import { Ng2ImgFallbackModule } from 'ng2-img-fallback';
+
 import { AppComponent } from './app.component';
 
 //bootstrap directives
@@ -29,7 +31,7 @@ import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload/ng2-file
   declarations: [
     AppComponent,
     ThumbsComponent,
-    FileSelectDirective, FileDropDirective, FileUploadComponent,BytesPipe
+    FileSelectDirective, FileDropDirective, FileUploadComponent, BytesPipe
   ],
   imports: [
     BrowserModule,
@@ -37,8 +39,8 @@ import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload/ng2-file
     HttpModule,
     AlertModule.forRoot(),
     ProgressbarModule.forRoot(),
-
-    AppRoutingModule
+    AppRoutingModule,
+    Ng2ImgFallbackModule
     
   ],
   providers: [SharedService,ThumbsService],

@@ -10,15 +10,12 @@ import { ThumbsComponent } from './pages/thumbs.component';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'home/360',
     pathMatch: 'full',
   },
   {
-    path: 'home',
-    component: ThumbsComponent,
-    data: {
-      title: 'First Thumbnailer'
-    }
+    path: 'home/:size',
+    component: ThumbsComponent
   }
 ];
 
