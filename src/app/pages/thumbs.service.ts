@@ -10,8 +10,8 @@ export class ThumbsService {
     
     constructor() { 
 
-        AWS.config.accessKeyId='AKIAIWVMCQRZUQSR53XQ';
-        AWS.config.secretAccessKey='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';
+        AWS.config.accessKeyId='pippo';
+        AWS.config.secretAccessKey='pippo';
         AWS.config.region="eu-west-1";
 
 
